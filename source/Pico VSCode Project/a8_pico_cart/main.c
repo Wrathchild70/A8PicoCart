@@ -14,30 +14,29 @@
  * Edit myboard.h depending on the type of flash memory on the pico clone
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "pico/stdlib.h"
 #include "pico/time.h"
 #include "tusb.h"
 
-#include "atari_cart.h"
+#include "cart_bus.h"
+#include "pico_menu.h"
 #include "fatfs_disk.h"
 
-void cdc_task(void);
+void cdc_task();
 
 int main(void)
 {
-    // check to see if we are plugged into Atari 8-bit
-    // by checking for high on PHI2 gpio for 100ms
-    gpio_init(ATARI_PHI2_PIN);
-    gpio_set_dir(ATARI_PHI2_PIN, GPIO_IN);
-    while (to_ms_since_boot(get_absolute_time()) < 100)
+  config_gpio();
+
+  // check to see if we are plugged into Atari 8-bit
+  // by checking for high on PHI2 gpio for 100ms
+  while (to_ms_since_boot(get_absolute_time()) < 100)
+  {
+    if (gpio_get(ATARI_PHI2_PIN))
     {
-      if (gpio_get(ATARI_PHI2_PIN))
-        atari_cart_main();
+      atari_cart_main();
     }
+  }
 
   // we are presumably powered from USB
   // enter USB mass storage mode
@@ -95,7 +94,7 @@ void tud_resume_cb(void)
 //--------------------------------------------------------------------+
 // USB CDC
 //--------------------------------------------------------------------+
-void cdc_task(void)
+void cdc_task()
 {
   // connected() check for DTR bit
   // Most but not all terminal client set this when making connection
@@ -126,11 +125,9 @@ void tud_cdc_line_state_cb(uint8_t itf, bool dtr, bool rts)
   (void) rts;
 
   // TODO set some indicator
-  if ( dtr )
-  {
+  if ( dtr ) {
     // Terminal connected
-  }else
-  {
+  } else {
     // Terminal disconnected
   }
 }
@@ -140,4 +137,3 @@ void tud_cdc_rx_cb(uint8_t itf)
 {
   (void) itf;
 }
-

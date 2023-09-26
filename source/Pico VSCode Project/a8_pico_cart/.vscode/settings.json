@@ -32,6 +32,13 @@
         "reent.h": "c",
         "features.h": "c",
         "flash_fs.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "pico_menu.h": "c",
+        "cart_bus.h": "c",
+        "sdcard.h": "c",
+        "osrom.h": "c",
+        "fatfs_disk.h": "c",
+        "math.h": "c",
+        "render3d.h": "c"
     }
 }

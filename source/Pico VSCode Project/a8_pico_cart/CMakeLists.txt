@@ -8,6 +8,7 @@ project(a8_pico_cart)
 
 set(PICO_BOARD_HEADER_DIRS ${CMAKE_SOURCE_DIR}) 
 set(PICO_BOARD myboard)
+set(__BSD_VISIBLE 1)
 
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
@@ -23,7 +24,7 @@ target_compile_definitions(a8_pico_cart PRIVATE
 
 target_sources(a8_pico_cart PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/main.c
-    ${CMAKE_CURRENT_LIST_DIR}/atari_cart.c
+    ${CMAKE_CURRENT_LIST_DIR}/pico_menu.c
     ${CMAKE_CURRENT_LIST_DIR}/msc_disk.c
     ${CMAKE_CURRENT_LIST_DIR}/usb_descriptors.c
     ${CMAKE_CURRENT_LIST_DIR}/fatfs_disk.c
@@ -31,6 +32,11 @@ target_sources(a8_pico_cart PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/fatfs/ff.c
     ${CMAKE_CURRENT_LIST_DIR}/fatfs/ffunicode.c
     ${CMAKE_CURRENT_LIST_DIR}/fatfs/diskio.c
+    ${CMAKE_CURRENT_LIST_DIR}/atr_emu.c
+    ${CMAKE_CURRENT_LIST_DIR}/cart_bus.c
+    ${CMAKE_CURRENT_LIST_DIR}/cart_emu.c
+    ${CMAKE_CURRENT_LIST_DIR}/sdcard.c
+    ${CMAKE_CURRENT_LIST_DIR}/xex_ldr.c
 ) 
 
 target_include_directories(a8_pico_cart PUBLIC

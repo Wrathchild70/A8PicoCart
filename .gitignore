@@ -1,0 +1,7 @@
+.vs/
+source/Pico VSCode Project/a8_pico_cart/.vscode/
+source/Pico VSCode Project/a8_pico_cart/build/
+/source/UnoCartOS/osrom.h
+/source/UnoCartOS/os.xex
+/source/UnoCartOS/os.rom
+/source/UnoCartOS/os.lst

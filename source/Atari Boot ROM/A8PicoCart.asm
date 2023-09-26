@@ -51,6 +51,7 @@ BOOT = $09
 CASINI = $02
 OSROM = $C000
 PORTB = $D301
+DMACTL = $D400
 NMIEN = $D40E
 PMBASE = $D407
 SDMCTL = $22F
@@ -1045,6 +1046,9 @@ endoftext
 	
 .proc RebootToSelectedCartCode
 	sei				; prevent GINTLK check in deferred vbi
+	lda #0
+	sta SDMCTL
+	sta DMACTL
 	lda #CART_CMD_ACTIVATE_CART	; tell the cart we're ready for it switch ROM
 	sta $D5DF
 	jmp COLDSV
