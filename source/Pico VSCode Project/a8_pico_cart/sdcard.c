@@ -17,6 +17,7 @@
 #include "cart_bus.h"
 #include "cart_emu.h" // for cart_ram
 #include "xex_ldr.h" // for CART_TYPE_XEX
+#include "Mode7.h" // for CART_TYPE_M7
 #include "sdcard.h"
 
 #include "ff.h"
@@ -311,7 +312,17 @@ int load_file(char *filename) {
 		cart_ram[3] = 0;	// has to be zero!
 	}
 	else {	// not a car/xex file - guess the type based on size
-		if (size == 8 * 1024) cart_type = CART_TYPE_8K;
+		if (size == 8 * 1024)
+		{
+			if (cart_ram[0x1FF8]=='M' && cart_ram[0x1FF9]=='7')
+			{
+				cart_type = CART_TYPE_M7;
+			}
+			else
+			{
+				cart_type = CART_TYPE_8K;
+			}
+		}
 		else if (size == 16*1024) cart_type = CART_TYPE_16K;
 		else if (size == 32*1024) cart_type = CART_TYPE_XEGS_32K;
 		else if (size == 64*1024) cart_type = CART_TYPE_XEGS_64K;

@@ -25,6 +25,7 @@
 #include "atr_emu.h"
 #include "cart_emu.h"
 #include "xex_ldr.h"
+#include "Mode7.h"
 #include "fatfs_disk.h"
 
 #include "osrom.h"
@@ -240,6 +241,8 @@ void __not_in_flash_func(atari_cart_main)(void) {
         emulate_disk_access(path);
     } else if (cartType == CART_TYPE_XEX) {
         feed_XEX_loader();
+    } else if (cartType == CART_TYPE_M7) {
+        emulate_Mode7_vram();
     } else {
         emulate_cartridge();
     }

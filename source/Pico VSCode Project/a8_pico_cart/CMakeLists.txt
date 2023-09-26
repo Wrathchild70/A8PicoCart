@@ -37,6 +37,8 @@ target_sources(a8_pico_cart PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/cart_emu.c
     ${CMAKE_CURRENT_LIST_DIR}/sdcard.c
     ${CMAKE_CURRENT_LIST_DIR}/xex_ldr.c
+    ${CMAKE_CURRENT_LIST_DIR}/Mode7.c
+    ${CMAKE_CURRENT_LIST_DIR}/stniccc.c
 ) 
 
 target_include_directories(a8_pico_cart PUBLIC

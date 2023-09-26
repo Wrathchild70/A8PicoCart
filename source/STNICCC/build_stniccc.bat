@@ -1,0 +1,1 @@
+mads Stniccc.asm -o:Stniccc.rom
